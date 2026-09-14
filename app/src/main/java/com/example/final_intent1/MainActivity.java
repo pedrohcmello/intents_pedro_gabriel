@@ -30,8 +30,6 @@ EditText altura = findViewById(R.id.editTextNumberDecimal1);
 EditText peso = findViewById(R.id.editTextNumberDecimal2);
 
 
-String alt2 = altura.getText().toString();
-
 
 //String alt3 = EditText.getText().toString();    Na linha 43 funciona.
 
@@ -39,7 +37,11 @@ String alt2 = altura.getText().toString();
 
 
 //INTENT EXPLÍCITA  ----> send,PROCESSAR
+// Exemplo
+        //Na prática o conceito de intent explicita é usado em Processar.Java
+        /*
 calcular.setOnClickListener(v ->{
+    String alt2 = altura.getText().toString();
     Intent intent = new Intent(this, Processar.class);
     intent.setAction(Intent.ACTION_SEND);
             intent.putExtra("ALTURA", alt2);
@@ -48,6 +50,24 @@ calcular.setOnClickListener(v ->{
             startActivity(intent);
 
 });
+*/
+
+//INTENT IMPLÍCITA
+        calcular.setOnClickListener(v -> {
+            String textoAltura = altura.getText().toString();
+            String textoPeso = peso.getText().toString();
+
+            float altNumerica = Float.parseFloat(altura.getText().toString());
+            float pesoNumerico = Float.parseFloat(peso.getText().toString());
+
+
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("decimal/float");
+            intent.putExtra("ALTURA", altNumerica);
+            intent.putExtra("PESO", pesoNumerico);
+
+            startActivity(intent);
+        });
 
     }
 }

@@ -16,34 +16,30 @@ public class Processar extends AppCompatActivity {
         Float altura = dadosIMC.getFloatExtra("ALTURA", 0.0f);
         Float peso = dadosIMC.getFloatExtra("PESO", 0.0f);
 
-        Float IMC = peso/(altura * altura);
+        Float IMC = 0.0f;
+        if (altura > 0) {
+            IMC = peso / (altura * altura);
+        }
 
         if (IMC < 25.0) {
             if (IMC >= 18.5) {
+                //INTENT EXPLÍCITA
                 Intent i = new Intent(this, Saudavel.class);
                 i.putExtra("IMC", IMC);
                 startActivity(i);
             } else {
+                //INTENT EXPLÍCITA
                 Intent i = new Intent(this, Abaixo.class);
                 i.putExtra("IMC", IMC);
                 startActivity(i);
             }
         } else {
+            //INTENT EXPLÍCITA
             Intent i = new Intent(this, Acima.class);
             i.putExtra("IMC", IMC);
             startActivity(i);
         }
+        finish();
 
     }
 }
-
-
-
-
-
-
-
-
-//NA LINHA 22
-//Aqui talvez era para ser INTENT também, e ter uma classe JAVA, mas estranhei isso.
-// Eu não fiz classe JAVA e suspeito que não precisa).
